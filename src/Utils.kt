@@ -12,6 +12,8 @@ fun readInputAsListOfInts(name: String) = readInput(name).map {
     numberRegex.findAll(it).map { it.value.toInt() }.toList()
 }
 
+fun readInputString(name: String) = Path("src/data/$name.txt").readText().trim()
+
 /**
  * Converts string to md5 hash.
  */
