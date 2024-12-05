@@ -8,6 +8,12 @@ sourceSets {
     }
 }
 
+kotlin {
+    compilerOptions {
+        freeCompilerArgs.add("-Xnon-local-break-continue")
+    }
+}
+
 tasks {
     wrapper {
         gradleVersion = "8.11"

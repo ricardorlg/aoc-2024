@@ -9,8 +9,10 @@ import kotlin.io.path.readText
 fun readInput(name: String) = Path("src/data/$name.txt").readText().trim().lines()
 
 fun readInputAsListOfInts(name: String) = readInput(name).map {
-    numberRegex.findAll(it).map { match -> match.value.toInt() }.toList()
+    it.toIntList()
 }
+
+fun String.toIntList() = numberRegex.findAll(this).map { match -> match.value.toInt() }.toList()
 
 fun readInputString(name: String) = Path("src/data/$name.txt").readText().trim()
 
@@ -31,3 +33,13 @@ val numberRegex = "-?\\d+".toRegex()
 fun String.equalsBySorted(other: String) = toCharArray().sorted() == other.toCharArray().sorted()
 
 fun isPrime(n: Int) = "1".repeat(n).matches(""".?|(..+?)\1+""".toRegex()).not()
+
+inline fun <T> Iterable<T>.sumOfIf(predicate: (T) -> Boolean, selector: (T) -> Int): Long {
+    var sum = 0L
+    for (element in this) {
+        if (predicate(element)) {
+            sum += selector(element)
+        }
+    }
+    return sum
+}
