@@ -35,6 +35,10 @@ fun main() {
     check(part1(testInput) == 161L)
     check(part2(partBTestInput) == 48L)
     val input = readInputString("day3")
-    part1(input).println()
-    part2(input).println()
+    executeWithTime {
+        part1(input)
+    }
+    executeWithTime(false) {
+        part2(input)
+    }
 }

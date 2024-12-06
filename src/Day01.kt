@@ -28,6 +28,10 @@ fun main() {
     check(part1(testInput) == 11L)
     check(part2(testInput) == 31L)
     val input = readInputAsListOfInts("day1")
-    part1(input).println()
-    part2(input).println()
+    executeWithTime {
+        part1(input)
+    }
+    executeWithTime(false){
+        part2(input)
+    }
 }

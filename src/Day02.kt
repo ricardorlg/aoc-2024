@@ -28,8 +28,12 @@ fun main() {
 
     val testInput = readInputAsListOfInts("day2_test")
     check(part1(testInput) == 2)
-    val partOneInput = readInputAsListOfInts("day2")
-    part1(partOneInput).println()
     check(part2(testInput) == 4)
-    part2(partOneInput).println()
+    val input = readInputAsListOfInts("day2")
+    executeWithTime {
+        part1(input)
+    }
+    executeWithTime(false) {
+        part2(input)
+    }
 }

@@ -2,6 +2,7 @@ import java.math.BigInteger
 import java.security.MessageDigest
 import kotlin.io.path.Path
 import kotlin.io.path.readText
+import kotlin.time.measureTimedValue
 
 /**
  * Reads lines from the given input txt file.
@@ -42,4 +43,27 @@ inline fun <T> Iterable<T>.sumOfIf(predicate: (T) -> Boolean, selector: (T) -> I
         }
     }
     return sum
+}
+
+fun List<String>.toGrid(): Map<Point2D, Char> {
+    val grid = mutableMapOf<Point2D, Char>()
+    forEachIndexed { row, line ->
+        line.forEachIndexed { col, c ->
+            grid[Point2D(col, row)] = c
+        }
+    }
+    return grid
+}
+
+fun executeWithTime(part1: Boolean = true, block: () -> Any) {
+    val (result, duration) = measureTimedValue(block)
+    if(part1) {
+        println("Part 1")
+    } else {
+        println("Part 2")
+    }
+    println("--------------------")
+    println("Execution time: $duration")
+    println("Result: $result")
+    println("--------------------")
 }
