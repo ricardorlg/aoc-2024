@@ -15,6 +15,8 @@ fun readInputAsListOfInts(name: String) = readInput(name).map {
 
 fun String.toIntList() = numberRegex.findAll(this).map { match -> match.value.toInt() }.toList()
 
+fun String.toLongList() = numberRegex.findAll(this).map { match -> match.value.toLong() }.toList()
+
 fun readInputString(name: String) = Path("src/data/$name.txt").readText().trim()
 
 /**
@@ -55,9 +57,9 @@ fun List<String>.toGrid(): Map<Point2D, Char> {
     return grid
 }
 
-fun executeWithTime(part1: Boolean = true, block: () -> Any) {
+inline fun executeWithTime(part1: Boolean = true, block: () -> Any) {
     val (result, duration) = measureTimedValue(block)
-    if(part1) {
+    if (part1) {
         println("Part 1")
     } else {
         println("Part 2")
@@ -66,4 +68,23 @@ fun executeWithTime(part1: Boolean = true, block: () -> Any) {
     println("Execution time: $duration")
     println("Result: $result")
     println("--------------------")
+}
+
+fun <T> combinationsWithRepetition(source: List<T>, size: Int): List<List<T>> {
+    if (size == 0) return listOf(emptyList())
+    val result = mutableListOf<List<T>>()
+    for (element in source) {
+        for (combination in combinationsWithRepetition(source, size - 1)) {
+            result.add(listOf(element) + combination)
+        }
+    }
+    return result
+}
+
+fun String.hasSuffix(other: String, strict:Boolean=true):Boolean {
+    return if(strict){
+        this.length > other.length && this.endsWith(other)
+    }else{
+        this.endsWith(other)
+    }
 }

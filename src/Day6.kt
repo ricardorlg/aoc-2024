@@ -18,6 +18,8 @@ fun main() {
         var current = initial
         var direction = Direction.UP
         while (true) {
+            visited.add(current to direction)
+            onlyPoints.add(current)
             val next = current.move(direction)
             if (grid[next] == null) {
                 break
@@ -32,8 +34,6 @@ fun main() {
                 if (current != initial) {
                     grid[current] = 'X'
                 }
-                visited.add(current to direction)
-                onlyPoints.add(current)
             }
         }
         return onlyPoints
