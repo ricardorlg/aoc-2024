@@ -26,11 +26,6 @@ fun String.md5() = BigInteger(1, MessageDigest.getInstance("MD5").digest(toByteA
     .toString(16)
     .padStart(32, '0')
 
-/**
- * The cleaner shorthand for printing output.
- */
-fun Any?.println() = println(this)
-
 val numberRegex = "-?\\d+".toRegex()
 
 fun String.equalsBySorted(other: String) = toCharArray().sorted() == other.toCharArray().sorted()
@@ -76,6 +71,30 @@ fun <T> combinationsWithRepetition(source: List<T>, size: Int): List<List<T>> {
     for (element in source) {
         for (combination in combinationsWithRepetition(source, size - 1)) {
             result.add(listOf(element) + combination)
+        }
+    }
+    return result
+}
+
+fun <T> combinationsWithoutRepetition(source: List<T>, size: Int): List<List<T>> {
+    if (size == 0) return listOf(emptyList())
+    val result = mutableListOf<List<T>>()
+    for (i in source.indices) {
+        val element = source[i]
+        val rest = source.subList(i + 1, source.size)
+        for (combination in combinationsWithoutRepetition(rest, size - 1)) {
+            result.add(listOf(element) + combination)
+        }
+    }
+    return result
+}
+
+fun <T> List<T>.allPairs(): List<List<T>> {
+    val result = mutableListOf<List<T>>()
+    for (i in indices) {
+        for (j in indices) {
+            if(i==j) continue
+            result.add(listOf(this[i], this[j]))
         }
     }
     return result

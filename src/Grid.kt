@@ -1,6 +1,6 @@
 class Grid(input: List<String>) {
     private val grid = input.map { it.toCharArray() }
-
+    
     val points = grid.indices.flatMap { r -> grid[r].indices.map { c -> Point2D(r, c) } }
 
     operator fun get(p: Point2D): Char? {
@@ -26,5 +26,9 @@ class Grid(input: List<String>) {
 
     override fun toString(): String {
         return grid.joinToString("\n") { it.joinToString("") }
+    }
+
+    operator fun contains(point: Point2D): Boolean {
+        return point.row in grid.indices && point.column in grid[0].indices
     }
 }

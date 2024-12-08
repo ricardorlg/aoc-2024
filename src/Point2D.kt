@@ -20,6 +20,19 @@ data class Point2D(
     fun distanceTo(other: Point2D): Int {
         return abs(column - other.column) + abs(row - other.row)
     }
+
+    operator fun plus(other: Point2D): Point2D {
+        return Point2D(row + other.row, column + other.column)
+    }
+
+    operator fun minus(other: Point2D): Point2D {
+        return Point2D(row - other.row, column - other.column)
+    }
+
+    operator fun unaryMinus(): Point2D {
+        return Point2D(-row, -column)
+    }
+
 }
 
 enum class Direction {
