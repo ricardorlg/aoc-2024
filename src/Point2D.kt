@@ -4,6 +4,19 @@ data class Point2D(
     val row: Int,
     val column: Int,
 ) {
+
+    operator fun plus(other: Point2D): Point2D {
+        return Point2D(row + other.row, column + other.column)
+    }
+
+    operator fun minus(other: Point2D): Point2D {
+        return Point2D(row - other.row, column - other.column)
+    }
+
+    operator fun unaryMinus(): Point2D {
+        return Point2D(-row, -column)
+    }
+
     fun move(direction: Direction): Point2D {
         return when (direction) {
             Direction.UP -> Point2D(row = row - 1, column = column)
@@ -21,17 +34,15 @@ data class Point2D(
         return abs(column - other.column) + abs(row - other.row)
     }
 
-    operator fun plus(other: Point2D): Point2D {
-        return Point2D(row + other.row, column + other.column)
+    fun cardinalNeighbors(): List<Point2D> {
+        return listOf(
+            move(Direction.UP),
+            move(Direction.DOWN),
+            move(Direction.LEFT),
+            move(Direction.RIGHT),
+        )
     }
 
-    operator fun minus(other: Point2D): Point2D {
-        return Point2D(row - other.row, column - other.column)
-    }
-
-    operator fun unaryMinus(): Point2D {
-        return Point2D(-row, -column)
-    }
 
 }
 

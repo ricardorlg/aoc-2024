@@ -93,17 +93,28 @@ fun <T> List<T>.allPairs(): List<List<T>> {
     val result = mutableListOf<List<T>>()
     for (i in indices) {
         for (j in indices) {
-            if(i==j) continue
+            if (i == j) continue
             result.add(listOf(this[i], this[j]))
         }
     }
     return result
 }
 
-fun String.hasSuffix(other: String, strict:Boolean=true):Boolean {
-    return if(strict){
+fun String.hasSuffix(other: String, strict: Boolean = true): Boolean {
+    return if (strict) {
         this.length > other.length && this.endsWith(other)
-    }else{
+    } else {
         this.endsWith(other)
+    }
+}
+
+fun Int.isEven() = this % 2 == 0
+fun Int.isOdd() = this % 2 != 0
+
+fun <T> listOfSizeAndValue(size: Int, value: T): List<T>? {
+    return if (size > 0) {
+        List(size) { value }
+    } else {
+        null
     }
 }

@@ -1,6 +1,6 @@
 class Grid(input: List<String>) {
     private val grid = input.map { it.toCharArray() }
-    
+
     val points = grid.indices.flatMap { r -> grid[r].indices.map { c -> Point2D(r, c) } }
 
     operator fun get(p: Point2D): Char? {
