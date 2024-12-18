@@ -118,3 +118,11 @@ fun <T> listOfSizeAndValue(size: Int, value: T): List<T>? {
         null
     }
 }
+
+fun solveSystemOfTwoEquations(a1: Long, b1: Long, c1: Long, a2: Long, b2: Long, c2: Long): Pair<Double, Double> {
+    val det = a1 * b2 - a2 * b1
+    if (det == 0L) error("Determinant is zero")
+    val detX = c1 * b2 - c2 * b1
+    val detY = a1 * c2 - a2 * c1
+    return Pair(detX.toDouble() / det, detY.toDouble() / det)
+}
